@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply from: "$project.rootDir/buildsystem/dependencies.gradle"
+
+android {
+
+    defaultConfig {
+        def globalConfig = rootProject.ext
+
+        compileSdkVersion globalConfig.androidCompileSdkVersion
+
+        minSdkVersion globalConfig.androidMinSdkVersion
+        targetSdkVersion globalConfig.androidTargetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "serverType"
+
+    productFlavors {
+
+        stage {
+            dimension "serverType"
+        }
+    }
+
+    buildTypes {
+        debug {}
+    }
+}
+
+    dependencies {
+        dataDependencies()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+

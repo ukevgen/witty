@@ -1,0 +1,138 @@
+//Android
+ext {
+    androidMinSdkVersion = 23
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
+    androidBuildToolsVersion = "29.0.3"
+}
+
+//Libraries
+ext {
+
+    // Android X
+    androidxVersion = '1.2.0'
+    navVersion = '2.3.0'
+
+    // Support
+    supportLibraryVersion = '28.0.0'
+
+    // Dagger
+    daggerVersion = '2.28.1'
+    rxJavaVersion = '2.2.19'
+    rxAndroidVersion = '2.1.1'
+
+    // Retrofit
+    retrofitVersion = '2.5.0'
+    okhttp3Version = '3.12.1'
+
+    //Java
+    javaxAnnotationVersion = '1.0'
+    javaxInjectVersion = '1'
+
+    // Kotlin
+    kotlinVersion = '1.3.41'
+    ktxVersion = '1.2.0-alpha03'
+
+    //Development
+    leakCanaryVersion = '1.6.2'
+
+    //JodaTime
+    jodaTimeVersion = '2.9.9.4'
+
+    // Logs + Crash Reporting
+    timberVersion = '4.7.0'
+}
+
+
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+/******* Modules Dependencies *******/
+
+ext.presentationDependencies = dependencyGroup {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+    implementation project(':data')
+
+    ui()
+    navigation()
+    dagger()
+    rxJava()
+    kotlinSdk()
+    jodaTime()
+    glide()
+}
+
+ext.domainDependencies = dependencyGroup {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //To generate time-based UUID
+    implementation 'com.fasterxml.uuid:java-uuid-generator:4.0'
+
+    kotlinSdk()
+    rxJava()
+    dagger()
+    jodaTime()
+}
+
+ext.dataDependencies = dependencyGroup {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    kotlinSdk()
+    rxJava()
+    dagger()
+    jodaTime()
+}
+
+ext.kotlinSdk = dependencyGroup {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    implementation "androidx.core:core-ktx:${ktxVersion}"
+}
+
+ext.ui = dependencyGroup {
+    implementation 'com.google.android.material:material:1.3.0-alpha02'
+    implementation 'com.android.support:customtabs:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+}
+
+ext.glide = dependencyGroup {
+    def glideVersion = '4.10.0'
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+}
+
+ext.androidSupport = dependencyGroup {
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+}
+
+ext.rxJava = dependencyGroup {
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+}
+
+ext.dagger = dependencyGroup {
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+}
+
+ext.jodaTime = dependencyGroup {
+    implementation "net.danlew:android.joda:${jodaTimeVersion}"
+}
+
+ext.navigation = dependencyGroup {
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+}

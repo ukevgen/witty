@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+
+apply from: "$project.rootDir/buildsystem/dependencies.gradle"
+
+android {
+
+    def globalConfig = rootProject.ext
+
+    defaultConfig {
+        applicationId "com.wolfx.warrior"
+        minSdkVersion globalConfig.androidMinSdkVersion
+        targetSdkVersion globalConfig.androidTargetSdkVersion
+        compileSdkVersion globalConfig.androidCompileSdkVersion
+
+        versionName "1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            ext.enableCrashlytics = true
+        }
+    }
+
+    flavorDimensions "serverType"
+    productFlavors {
+
+        stage {
+            dimension "serverType"
+            versionName = android.defaultConfig.versionName + "-stage"
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+dependencies {
+    presentationDependencies()
+}

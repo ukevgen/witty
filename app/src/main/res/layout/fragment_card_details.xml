@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.witty.bank.presentation.main.card.details.CardDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/tvCardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="16dp"
+            android:text="Enter card  details"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCardDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:text="This card must be in your name"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCardTitle" />
+
+        <ImageView
+            android:id="@+id/ivBankCard"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ic_credit_card_24"
+            app:layout_constraintStart_toStartOf="@+id/tvCardDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvCardDescription" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtCardNumber"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_card_number_r16"
+            android:digits="01234 56789"
+            android:hint="16 digit card number"
+            android:inputType="number"
+            android:maxLength="19"
+            android:paddingStart="8dp"
+            android:text="@={viewModel.cardNumberLiveData}"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/cursor_black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBankCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBankCard"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvCardNumberError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/edtCardNumber"
+            app:layout_constraintStart_toStartOf="@id/edtCardNumber"
+            app:layout_constraintTop_toBottomOf="@+id/edtCardNumber"
+            tools:text="Please enter a valid card number"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtCardExpiration"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_card_number_r16"
+            android:hint="MM/YY"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/cursor_black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/edtCardCVV"
+            app:layout_constraintStart_toStartOf="@id/ivBankCard"
+            app:layout_constraintTop_toBottomOf="@+id/tvCardNumberError" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtCardCVV"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_card_number_r16"
+            android:hint="CVV"
+            android:inputType="numberPassword"
+            android:maxLength="3"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/cursor_black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edtCardExpiration"
+            app:layout_constraintTop_toTopOf="@+id/edtCardExpiration" />
+
+        <TextView
+            android:id="@+id/tvCardDateError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/edtCardExpiration"
+            app:layout_constraintStart_toStartOf="@id/edtCardExpiration"
+            app:layout_constraintTop_toBottomOf="@+id/edtCardExpiration"
+            tools:text="Enter correct date"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvCardCVVError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/edtCardCVV"
+            app:layout_constraintStart_toStartOf="@id/edtCardCVV"
+            app:layout_constraintTop_toBottomOf="@+id/edtCardCVV"
+            tools:text="Please enter full details"
+            tools:visibility="visible" />
+
+
+        <include
+            android:id="@+id/lBottomView"
+            layout="@layout/layout_card_details_bottom_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

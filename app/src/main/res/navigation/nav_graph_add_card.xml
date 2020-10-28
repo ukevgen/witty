@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_add_card"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.witty.bank.presentation.main.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cardDetailsFragment"
+        android:name="com.witty.bank.presentation.main.card.details.CardDetailsFragment"
+        android:label="CardDetailsFragment"
+        tools:layout="@layout/fragment_card_details">
+        <action
+            android:id="@+id/action_cardDetailsFragment_to_cardAmountFragment"
+            app:destination="@id/cardAmountFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.witty.bank.presentation.main.account.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_cardDetailsFragment"
+            app:destination="@id/cardDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardAmountFragment"
+        android:name="com.witty.bank.presentation.main.card.amount.CardAmountFragment"
+        android:label="CardAmountFragment"
+        tools:layout="@layout/fragment_card_amount">
+        <action
+            android:id="@+id/action_cardAmountFragment_to_cardVerificationFragment"
+            app:destination="@id/cardVerificationFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardVerificationFragment"
+        android:name="com.witty.bank.presentation.main.card.verification.verify.CardVerificationFragment"
+        android:label="CardVerificationFragment"
+        tools:layout="@layout/fragment_card_verification">
+        <action
+            android:id="@+id/action_cardVerificationFragment_to_cardVerificationResultFragment"
+            app:destination="@id/cardVerificationResultFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardVerificationResultFragment"
+        android:name="com.witty.bank.presentation.main.card.verification.result.PaymentResultFragment"
+        android:label="CardVerificationResultFragment"
+        tools:layout="@layout/fragment_payment_result">
+        <action
+            android:id="@+id/action_cardVerificationResultFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+</navigation>
